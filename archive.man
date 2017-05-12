@@ -1,9 +1,9 @@
-.TH ARCHIVE 8l "31 December 2014" r1.78
+.TH ARCHIVE 8l "31 December 2014" r1.99
 .SH NAME
 .B archive
 - selectively archives and deletes old files on a remote host
 .SH SYNOPSIS
-\fBarchive\fR [\fB-c\fI<config>\fR] [\fB-d\fR] [\fB-l\fR] [\fB-v\fR]
+\fBarchive\fR [[\fB-b\fR]|[\fB-f\fR]] [\fB-c\fI<config>\fR] [\fB-d\fR] [\fB-l\fR] [\fB-v\fR]
 [\fB-z\fR]
 \fI<host_name>\fR
 |\fB-V\fR
@@ -14,9 +14,14 @@ is a Bourne shell script which should work equally well on all versions of UNIX
 and Linux.
 .SH DESCRIPTION
 .B archive
-creates a of local or remote systems using \fItar\fR or \fIlftp's mirror\fR
-command.
+creates a full backup of local or remote systems using \fItar\fR or
+\fIlftp's mirror\fR command. Only local file systems will be included in
+the archives and the script will attempt to avoid including any cdroms, dvds
+or loop back file systems.
 .SH OPTIONS
+.TP 5
+.B -b
+back up the databases only. (See \fB-f\fR option below.
 .TP 5
 .B -c 
 .I <config_file>
@@ -27,6 +32,10 @@ command line.
 .TP
 .B -d 
 sets the script to debug mode (ie. runs with the shell option -x)
+.TP 5
+.B -f
+backup up the file system only. It is an error to use the \fB-f\fR option 
+together with the \fB=b\fR option.
 .TP 5
 .B -l
 turns on logging using the 
